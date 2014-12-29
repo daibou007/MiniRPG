@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" backgroundcolor="#808080">
+ <properties>
+  <property name="animate_delay" value="0.016"/>
+ </properties>
+ <tileset firstgid="1" name="terrain_atlas" tilewidth="32" tileheight="32">
+  <image source="terrain_atlas.png" trans="fefcff" width="1024" height="1024"/>
+  <terraintypes>
+   <terrain name="新地形" tile="-1"/>
+  </terraintypes>
+  <tile id="357">
+   <animation>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="391">
+   <properties>
+    <property name="animate_enable" value="YES"/>
+    <property name="animate_next_tile" value="453"/>
+   </properties>
+   <animation>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="453" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+    <frame tileid="391" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="1025" name="meta_tiles" tilewidth="32" tileheight="32">
+  <image source="meta_tiles.png" trans="fefcff" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="1027" name="obj_misk_atlas" tilewidth="32" tileheight="32">
+  <image source="obj_misk_atlas.png" trans="fefcff" width="1024" height="1024"/>
+ </tileset>
+ <layer name="复制 块层 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyVlA0KwjAMRoe319mDTO1BqvYg++kdjJDAx0fSbcKDzqUvTRqdL8NQhKtwE0bhLiTnOWkcwjGzEr3HdRYmwItfhBXe7+UvQM9XKPdEOby6er6ZchfK8RCewkvrXjt50MmY9y18hK9QD/o2ocFe9HLMdsKHz5FvOeHDOK93Vn90/9wbc/w/3lzYGY6ej2Oi2UV4XsyVnfoiVwZS4OO8KfBl7Y1hXs+Xg9xI1XjDvJ6vBrkRnqsWfJcob3P8VfvrzYZ3H15fmeg/jfdZfSPdA+7h+8e1dw6rB38buIdrxLU3z01jsD+9HuH6Bws8I0k=
+  </data>
+ </layer>
+ <layer name="块层 1" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJyVVFtOwzAQdJwWCbgGIPE4BYKPHqMIBDlIAlQqh0BKgA+4Q4HywymAlnMwK3voxG1FWWm0yWY9Xs+u08+d60c8R7wAh4KTiJF8vwXyLHiNk2vHtdGPXLrHm3e/NpJvX4ifInbmZnylnwfjE2AaY2aDPPgPvL9Hvg7eu8A6no9dyP8GauEbCN8wb8fJ9+kD3xbet4FdH+pkfLigVsZsv0rqzBD3piNw5EJdxme8jJOjTmqdCl8dfSPfqV8vnpfWxNxK1nawTxdYk/0q6Y0Z9St80JB2jhm4SFBk7bXUbyJ1q367wneJtVcJrrNZ7dSBfNZf41P9eivy0Xhe5aN+xlf8g8/OWsWe63mpX8p3h7X3CR7kvI30Ytn8FdLLv4zzZ7zL5q+QHOrdCP8r/NjP7m/p23NYJ/qZHwsP56GRPlInaqh9LhP9NF/vE/NVJ+VjXpXol+bXkmemOtF416gL9ev5+fxK+MrkufHt/xaf9f6abcBvrghyU2+zIWbqJgu9tf/2Hvz+ijhYMFeP4HgCfgCuiJ/y
+  </data>
+ </layer>
+ <layer name="meta" width="20" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzFk0sKACEMQ1W8/5nFxaAU4yRatZCNyGv6izmEeEBMpNxk3y0vDWQZM1lvN3hsjhpevC9u+UPz/8uB/r/i9bvnxUP7slsvex/KnHd5M38or3KHjLd+fqv+VI7iz6N/TK+YfVGFeAXLsQfr
+  </data>
+ </layer>
+ <objectgroup name="exits">
+  <properties>
+   <property name="desination" value="town"/>
+   <property name="startx" value="17"/>
+   <property name="starty" value="1"/>
+  </properties>
+  <object name="exit" type="exit" x="480" y="608" width="96" height="32">
+   <properties>
+    <property name="destination" value="town"/>
+    <property name="startx" value="16"/>
+    <property name="starty" value="19"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
