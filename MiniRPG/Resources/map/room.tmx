@@ -55,7 +55,7 @@
  <objectgroup name="exits">
   <object name="exit" type="exit" x="224" y="450" width="30" height="27">
    <properties>
-    <property name="destination" value="wood"/>
+    <property name="destination" value="town"/>
     <property name="startx" value="3"/>
     <property name="starty" value="15"/>
    </properties>
@@ -71,7 +71,7 @@
  </layer>
  <layer name="meta" width="15" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxUwcpCuHqaHWL0wPcRgbHqZ0OSQ7ccmj64Xn5sI6cXnR3x6sfkLn38BFv8Bkw==
+   eJxjYBgYwMgxikcxYcwEpZHTDXL6YSKgF1/aI6SXEYd+EMCnFx0TSu8AOzYGWw==
   </data>
  </layer>
 </map>

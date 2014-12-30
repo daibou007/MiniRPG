@@ -9,10 +9,12 @@
 #import "GameLayer.h"
 #import "NPCManager.h"
 #import "TouchLayer.h"
+#import "EnvironmentLayer.h"
+
 
 #import "SimpleAnimObject.h"
 #import "Util.h"
-#import "CCAnimatedTMXTiledMap.h"
+//#import "CCAnimatedTMXTiledMap.h"
 
 
 // Import the interfaces
@@ -24,19 +26,22 @@
 #import "GameSounds.h"
 
 @interface GameLayer ()
-@property (nonatomic,strong) TouchLayer        *touchLayer;
-@property (nonatomic,strong) HudLayer          *hudLayer;
-@property (nonatomic, strong) CCTMXTiledMap    *tileMap;
-@property (nonatomic, strong) SimpleAnimObject *hero;
-@property (nonatomic, strong) CCTMXLayer       *metaLayer;
-@property (nonatomic        ) BOOL             canWalk;
-@property (nonatomic        ) float            tileSize;
-@property (nonatomic, strong) CCTMXObjectGroup *exitGroup;
-@property (nonatomic, strong) CCTMXLayer       *npcLayer;
-@property (nonatomic, strong) NPCManager       *npcManager;
 
-@property (nonatomic, strong) 	CCAnimatedTMXTiledMap	*animator;
-@property (nonatomic        ) int              gunmanDirection;
+@property (nonatomic,strong) TouchLayer                 *touchLayer;
+@property (nonatomic,strong) EnvironmentLayer           *envLayer;
+@property (nonatomic,strong) HudLayer                   *hudLayer;
+@property (nonatomic, strong) CCTMXTiledMap             *tileMap;
+@property (nonatomic, strong) SimpleAnimObject          *hero;
+@property (nonatomic, strong) CCTMXLayer                *metaLayer;
+@property (nonatomic        ) BOOL                      canWalk;
+@property (nonatomic        ) float                     tileSize;
+@property (nonatomic, strong) CCTMXObjectGroup          *exitGroup;
+@property (nonatomic, strong) CCTMXLayer                *npcLayer;
+@property (nonatomic, strong) NPCManager                *npcManager;
+
+//@property (nonatomic, strong) 	CCAnimatedTMXTiledMap    *animator;
+@property (nonatomic        ) int                       gunmanDirection;
+
 
 @end
 
@@ -55,6 +60,7 @@
 
 	// add layer as a child to scene
 	[scene addChild: layer];
+
     
     layer.touchLayer = [TouchLayer  node];
     layer.touchLayer.del = layer;
@@ -84,14 +90,18 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"character.plist"];
          [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"dpad_buttons.plist"];
         self.hero = [SimpleAnimObject spriteWithSpriteFrameName:@"male_walkcycle_s_01.png"];
-        self.hero.position = ccp(32*11,64+16);
+        self.hero.position = ccp(self.tileSize*7*2,self.tileSize*13*2+16);
+        
         self.hero.scale = 1;
-        self.hero.anchorPoint = ccp(0.5,0.5);
+        self.hero.anchorPoint = ccp(0.5,1);
         self.hero.zOrder = 0;
-        [self addChild:self.hero z:[[self.tileMap layerNamed:@"floor"] zOrder]];
+        [self addChild:self.hero];
         
         self.gunmanDirection = DPAD_DOWN;
         
+        self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
+        [self addChild:self.envLayer z:10];
+        [self.envLayer setVisible:NO];
         
         self.canWalk = YES;
 
@@ -114,11 +124,10 @@
     }
     name = [name stringByAppendingString:@".tmx"];
     self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:name];
-    self.tileMap.anchorPoint = ccp(0,0);
     [self.tileMap setScale:kGameScale];
     [self addChild:self.tileMap z:-1];
     self.metaLayer = [self.tileMap layerNamed:@"meta"];
-    self.metaLayer.visible = NO;
+    self.metaLayer.visible = YES;
     self.tileSize = self.tileMap.tileSize.width;
 
     self.exitGroup = [self.tileMap objectGroupNamed:@"exits"];
@@ -126,7 +135,6 @@
     [self.npcManager loadNPCsForTileMap:self.tileMap named:name];
     
 
-    self.animator = [CCAnimatedTMXTiledMap fromTMXTiledMap: self.tileMap];
 
     
 }
@@ -136,8 +144,7 @@
  */
 - (void)update:(ccTime)dt
 {
-    [self setViewpointCenter:self.hero.position];
-    
+//   [self setViewpointCenter:self.hero.position];
    	bool resetAnimation = NO;
     //We reset the animation if the gunman changes direction
     if(self.touchLayer.dPad.direction != DPAD_NO_DIRECTION){
@@ -161,6 +168,8 @@
     {
         [self setPlayerPosition:playerPos];
     }
+    
+    
 
 }
 
@@ -183,7 +192,8 @@
 
     CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
     CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
-    self.position = viewPoint;
+    [self.tileMap setPosition:viewPoint];
+    
 
 }
 
@@ -200,6 +210,38 @@
         [self.hudLayer.chatbox setWithNPC:(NSString *)npc text:text];
         [self.hudLayer.chatbox advanceTextOrHide];
     }
+}
+
+-(void)showRaining:(bool)show{
+
+    if(self.envLayer){
+        [self.envLayer setVisible:YES];
+//        [self.envLayer removeAllChildrenWithCleanup:YES];
+//        [self removeChild:self.envLayer cleanup:YES];
+//        self.envLayer = nil;
+    }
+    
+//    self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
+//    self.envLayer.position = ccp(0, 0);
+//    [self.envLayer setContentSize:self.contentSize];
+//    [[self.scene ] addChild:self.envLayer z:10];
+    
+   //TODO bool变量
+//    if (show) {
+//        [self.envLayer setVisible:YES];
+//    }else{
+//        [self.envLayer setVisible:NO];
+//    }
+}
+/**
+ *  重置效果层
+ */
+-(void)resetEffertLayers{
+//    if (self.envLayer) {
+//        [self.envLayer removeAllChildrenWithCleanup:YES];
+//        [self removeChild:self.envLayer cleanup:YES];
+//        self.envLayer = nil;
+//    }
 }
 
 /**
@@ -266,11 +308,12 @@
 
     // Animate the player
     id moveAction = [CCMoveTo actionWithDuration:0.4 position:position];
-
+//    [self setViewpointCenter:self.hero.position];
 	// Play actions
     
     [self playHeroMoveAnimationFromPosition:self.hero.position toPosition:position];
     [self.hero runAction:[CCSequence actions:moveAction, nil]];
+    
     
 }
 
@@ -317,8 +360,11 @@
             NSString *name = exit[@"destination"];
             CGPoint heroPoint = CGPointMake([exit[@"startx"] floatValue] * self.tileSize + (self.tileSize/2), [exit[@"starty"] floatValue] * self.tileSize + (self.tileSize/2));
 
-            self.hero.position = heroPoint;
+            [self resetEffertLayers];
             [self loadMapNamed:name];
+            self.hero.position = heroPoint;
+            [self setViewpointCenter:heroPoint];
+//            [self setPlayerPosition:heroPoint];
             return;
         }
     }
@@ -354,6 +400,8 @@
     int y = (_tileMap.mapSize.height * _tileMap.tileSize.height) - (tileCoord.y * _tileMap.tileSize.height) - _tileMap.tileSize.height;
     return ccp(x, y);
 }
+
+
 
 #pragma mark - TouchLayerDelegate<NSObject>
 

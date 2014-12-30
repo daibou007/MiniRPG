@@ -11,6 +11,6 @@
 
 #define kGameScale 2
 //TODO  room
-#define kStartingRoom @"wood"
+#define kStartingRoom @"room"
 
 #endif
