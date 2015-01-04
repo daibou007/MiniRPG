@@ -43,12 +43,12 @@
     [self.dPad ccTouchesMoved:touches withEvent:event];
 }
 -(void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if(self.del){
-        if ([self.del isChatBoxShow]) {
-            [self.del touchEnded];
-            return;
-        }
-    }
+//    if(self.del){
+//        if ([self.del isChatBoxShow]) {
+//            [self.del touchEnded];
+//            return;
+//        }
+//    }
     
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView: [touch view]];

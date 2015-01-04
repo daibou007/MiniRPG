@@ -45,12 +45,12 @@
    eJztk0EKwjAQRcdFIT2G1YvY6kGaniztSWLxIFa8h38gA2nMwknBVT88Qgb+C4GEiMjXRPeIGTgwggloc0SnSfCRW5sLOi04h5WR2anA16NjwTWsNvJ1BT7JLerKGcMG3549/4oz+J9G3ztk3je7fIGPeyOYzHrGridYFD7psW8Gj7AXlw38Gp/4qvrbpfXJnV7gnXFpfGm3Bf0GX66bm30A9Xo1Xg==
   </data>
  </layer>
- <layer name="buildings-helper" width="20" height="20" visible="0">
+ <layer name="buildings-helper" width="20" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBi6QJOTMv2qaPo9KTRvFIwCeoJWjoF2AXagDs1HlLgPWa87jfKlC5XDL4UK/lXlQMWkgoVcmGKUlJMHsZgHKyfVgDQACV4G/A==
   </data>
  </layer>
- <layer name="tress-helper" width="20" height="20" visible="0">
+ <layer name="tress-helper" width="20" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2DwgSo2BoZqIK5ho455s4DmzAbiOVQybxSMglHAwAAAzxkDZw==
   </data>

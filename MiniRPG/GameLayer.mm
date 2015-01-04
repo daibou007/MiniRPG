@@ -39,9 +39,6 @@
 @property (nonatomic, strong) CCTMXLayer                *npcLayer;
 @property (nonatomic, strong) NPCManager                *npcManager;
 
-//@property (nonatomic, strong) 	CCAnimatedTMXTiledMap    *animator;
-@property (nonatomic        ) int                       gunmanDirection;
-
 
 @end
 
@@ -90,18 +87,16 @@
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"character.plist"];
          [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"dpad_buttons.plist"];
         self.hero = [SimpleAnimObject spriteWithSpriteFrameName:@"male_walkcycle_s_01.png"];
-        self.hero.position = ccp(self.tileSize*7*2,self.tileSize*13*2+16);
+        self.hero.position = ccp(32*6,32*2+16);
         
         self.hero.scale = 1;
-        self.hero.anchorPoint = ccp(0.5,1);
+        self.hero.anchorPoint = ccp(0.5,0.5);
         self.hero.zOrder = 0;
-        [self addChild:self.hero];
+        [self addChild:self.hero z:[[self.tileMap layerNamed:@"floor"] zOrder]];
         
-        self.gunmanDirection = DPAD_DOWN;
-        
-        self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
-        [self addChild:self.envLayer z:10];
-        [self.envLayer setVisible:NO];
+//        self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
+//        [self addChild:self.envLayer z:10];
+//        [self.envLayer setVisible:NO];
         
         self.canWalk = YES;
 
@@ -127,16 +122,12 @@
     [self.tileMap setScale:kGameScale];
     [self addChild:self.tileMap z:-1];
     self.metaLayer = [self.tileMap layerNamed:@"meta"];
-    self.metaLayer.visible = YES;
+    self.metaLayer.visible = NO;
     self.tileSize = self.tileMap.tileSize.width;
 
     self.exitGroup = [self.tileMap objectGroupNamed:@"exits"];
     self.npcLayer = [self.tileMap layerNamed:@"npc"];
     [self.npcManager loadNPCsForTileMap:self.tileMap named:name];
-    
-
-
-    
 }
 
 /**
@@ -144,33 +135,23 @@
  */
 - (void)update:(ccTime)dt
 {
-//   [self setViewpointCenter:self.hero.position];
-   	bool resetAnimation = NO;
+  
     //We reset the animation if the gunman changes direction
-    if(self.touchLayer.dPad.direction != DPAD_NO_DIRECTION){
-        if(self.gunmanDirection != self.touchLayer.dPad.direction){
-            resetAnimation = YES;
-            self.gunmanDirection = self.touchLayer.dPad.direction;
+    
+    self.hero.velocity = ccp(self.touchLayer.dPad.pressedVector.x*25, self.touchLayer.dPad.pressedVector.y*25);
+    
+    if (self.hero.velocity.x != 0 || self.hero.velocity.y != 0) {
+        
+        CGPoint playerPos = [self.hero getNewPosition];
+        
+        if (playerPos.x <= (self.tileMap.mapSize.width * self.tileMap.tileSize.width) &&
+            playerPos.y <= (self.tileMap.mapSize.height * self.tileMap.tileSize.height) &&
+            playerPos.y >= 0 &&
+            playerPos.x >= 0 ){
+            [self setPlayerPosition:playerPos];
+            [self setViewpointCenter:self.hero.position];
         }
     }
-    if(self.hero.velocity.x != self.touchLayer.dPad.pressedVector.x*30 || self.hero.velocity.y != self.touchLayer.dPad.pressedVector.y*30){
-        self.hero.velocity = ccp(self.touchLayer.dPad.pressedVector.x*30, self.touchLayer.dPad.pressedVector.y*30);
-        resetAnimation = YES;
-    }
-    
-    
-    CGPoint playerPos = [self.hero getNewPosition];
-    
-    if (playerPos.x <= (_tileMap.mapSize.width * _tileMap.tileSize.width) &&
-        playerPos.y <= (_tileMap.mapSize.height * _tileMap.tileSize.height) &&
-        playerPos.y >= 0 &&
-        playerPos.x >= 0 )
-    {
-        [self setPlayerPosition:playerPos];
-    }
-    
-    
-
 }
 
 /**
@@ -184,23 +165,20 @@
 
     int x = MAX(position.x, winSize.width / 2);
     int y = MAX(position.y, winSize.height / 2);
-    x = MIN(x, (_tileMap.mapSize.width * _tileMap.tileSize.width)
+    x = MIN(x, (self.tileMap.mapSize.width * self.tileMap.tileSize.width)
             - winSize.width / 2);
-    y = MIN(y, (_tileMap.mapSize.height * _tileMap.tileSize.height)
+    y = MIN(y, (self.tileMap.mapSize.height * self.tileMap.tileSize.height)
             - winSize.height/2);
     CGPoint actualPosition = ccp(x, y);
 
     CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
     CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
-    [self.tileMap setPosition:viewPoint];
-    
+    self.position = viewPoint;
 
 }
 
 -(void) playSound:(NSString *)nameStr{
-    
     [[GameSounds sharedGameSounds] playBackgroundMusic:nameStr];
-    
 }
 
 - (void) npc: (NSString *)npc say:(NSString *) text{
@@ -216,32 +194,12 @@
 
     if(self.envLayer){
         [self.envLayer setVisible:YES];
-//        [self.envLayer removeAllChildrenWithCleanup:YES];
-//        [self removeChild:self.envLayer cleanup:YES];
-//        self.envLayer = nil;
     }
-    
-//    self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
-//    self.envLayer.position = ccp(0, 0);
-//    [self.envLayer setContentSize:self.contentSize];
-//    [[self.scene ] addChild:self.envLayer z:10];
-    
-   //TODO bool变量
-//    if (show) {
-//        [self.envLayer setVisible:YES];
-//    }else{
-//        [self.envLayer setVisible:NO];
-//    }
 }
 /**
  *  重置效果层
  */
 -(void)resetEffertLayers{
-//    if (self.envLayer) {
-//        [self.envLayer removeAllChildrenWithCleanup:YES];
-//        [self removeChild:self.envLayer cleanup:YES];
-//        self.envLayer = nil;
-//    }
 }
 
 /**
@@ -283,7 +241,7 @@
         CCSprite  *cc =  [self.npcLayer tileAt:tileCoord];
         NSString *dir = [self.npcLayer propertyNamed:@"face"];
         
-        if (self.hero.position.x > tileCoord.x * _tileMap.tileSize.width) {
+        if (self.hero.position.x > tileCoord.x * self.tileMap.tileSize.width) {
             //R
             if ([dir isEqualToString:@"LEFT"]) {
                 cc.flipX = YES;
@@ -308,12 +266,10 @@
 
     // Animate the player
     id moveAction = [CCMoveTo actionWithDuration:0.4 position:position];
-//    [self setViewpointCenter:self.hero.position];
 	// Play actions
     
     [self playHeroMoveAnimationFromPosition:self.hero.position toPosition:position];
     [self.hero runAction:[CCSequence actions:moveAction, nil]];
-    
     
 }
 
@@ -361,10 +317,11 @@
             CGPoint heroPoint = CGPointMake([exit[@"startx"] floatValue] * self.tileSize + (self.tileSize/2), [exit[@"starty"] floatValue] * self.tileSize + (self.tileSize/2));
 
             [self resetEffertLayers];
-            [self loadMapNamed:name];
+            
             self.hero.position = heroPoint;
-            [self setViewpointCenter:heroPoint];
-//            [self setPlayerPosition:heroPoint];
+            [self loadMapNamed:name];
+            [self setViewpointCenter:self.hero.position];
+
             return;
         }
     }
@@ -387,8 +344,8 @@
  * Given a point on the map, returns the tile coordinate for that point.
  */
 - (CGPoint)tileCoordForPosition:(CGPoint)position {
-    int x = position.x / (_tileMap.tileSize.width);
-    int y = ((_tileMap.mapSize.height * _tileMap.tileSize.height) - position.y) / (_tileMap.tileSize.height);
+    int x = position.x / (self.tileMap.tileSize.width);
+    int y = ((self.tileMap.mapSize.height * self.tileMap.tileSize.height) - position.y) / (self.tileMap.tileSize.height);
     return ccp(x, y);
 }
 
@@ -396,8 +353,8 @@
  * Given a tile coordinate, returns the position on screen
  */
 - (CGPoint)positionForTileCoord:(CGPoint)tileCoord {
-    int x = (tileCoord.x * _tileMap.tileSize.width) + _tileMap.tileSize.width;
-    int y = (_tileMap.mapSize.height * _tileMap.tileSize.height) - (tileCoord.y * _tileMap.tileSize.height) - _tileMap.tileSize.height;
+    int x = (tileCoord.x * self.tileMap.tileSize.width) + self.tileMap.tileSize.width;
+    int y = (self.tileMap.mapSize.height * self.tileMap.tileSize.height) - (tileCoord.y * self.tileMap.tileSize.height) - self.tileMap.tileSize.height;
     return ccp(x, y);
 }
 
