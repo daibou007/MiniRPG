@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D20610BD-D5B9-4848-92F0-DFDAE4C012EB</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MiniRPG</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1416780BE2D0C750E6DC11E35FB2C6E205C36B26</key>
+		<string>https://github.com/daibou007/MiniRPG.git</string>
+		<key>4673CFC852A2AF1B7671189DAA7F2C2065563288</key>
+		<string>https://github.com/daibou007/CCShake.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MiniRPG.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1416780BE2D0C750E6DC11E35FB2C6E205C36B26</key>
+		<string>../..</string>
+		<key>4673CFC852A2AF1B7671189DAA7F2C2065563288</key>
+		<string>../../MiniRPG/third/CCShake</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/daibou007/MiniRPG.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1416780BE2D0C750E6DC11E35FB2C6E205C36B26</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4673CFC852A2AF1B7671189DAA7F2C2065563288</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CCShake</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1416780BE2D0C750E6DC11E35FB2C6E205C36B26</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MiniRPG</string>
+		</dict>
+	</array>
+</dict>
+</plist>

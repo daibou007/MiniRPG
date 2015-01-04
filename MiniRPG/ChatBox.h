@@ -8,6 +8,5 @@
 @interface ChatBox : CCNode
 
 - (void) setWithNPC:(NSString *) npc text:(NSString *) text;
-- (void) advanceTextOrHide;
 
 @end

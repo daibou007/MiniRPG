@@ -14,8 +14,8 @@ end
 function soldier:interact()
     if self.game:getMetaValueForKey("room_soldier_greeting") == "true" then
         --self.game:playSound("soft.mp3")
-
-
+        self.game:shake()
+        self.game:flash()
         self.game:npc_say("soldier","千万把公主带回家！！！")
     else
         self.game:npc_say("soldier", "You must save the princess! She has been taken!")

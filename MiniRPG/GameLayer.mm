@@ -7,38 +7,9 @@
 //
 
 #import "GameLayer.h"
-#import "NPCManager.h"
-#import "TouchLayer.h"
-#import "EnvironmentLayer.h"
 
-
-#import "SimpleAnimObject.h"
-#import "Util.h"
-//#import "CCAnimatedTMXTiledMap.h"
-
-
-// Import the interfaces
-#import "config.h"
-
-#import "CCAnimate+SequenceLoader.h"
-#import "CCAnimation+SequenceLoader.h"
-
-#import "GameSounds.h"
 
 @interface GameLayer ()
-
-@property (nonatomic,strong) TouchLayer                 *touchLayer;
-@property (nonatomic,strong) EnvironmentLayer           *envLayer;
-@property (nonatomic,strong) HudLayer                   *hudLayer;
-@property (nonatomic, strong) CCTMXTiledMap             *tileMap;
-@property (nonatomic, strong) SimpleAnimObject          *hero;
-@property (nonatomic, strong) CCTMXLayer                *metaLayer;
-@property (nonatomic        ) BOOL                      canWalk;
-@property (nonatomic        ) float                     tileSize;
-@property (nonatomic, strong) CCTMXObjectGroup          *exitGroup;
-@property (nonatomic, strong) CCTMXLayer                *npcLayer;
-@property (nonatomic, strong) NPCManager                *npcManager;
-
 
 @end
 
@@ -177,30 +148,8 @@
 
 }
 
--(void) playSound:(NSString *)nameStr{
-    [[GameSounds sharedGameSounds] playBackgroundMusic:nameStr];
-}
 
-- (void) npc: (NSString *)npc say:(NSString *) text{
-    if (self.hudLayer && ![self.hudLayer.chatbox visible]) {
-        self.hudLayer.chatbox = [ChatBox node];
-        [self.hudLayer addChild:self.hudLayer.chatbox];
-        [self.hudLayer.chatbox setWithNPC:(NSString *)npc text:text];
-        [self.hudLayer.chatbox advanceTextOrHide];
-    }
-}
 
--(void)showRaining:(bool)show{
-
-    if(self.envLayer){
-        [self.envLayer setVisible:YES];
-    }
-}
-/**
- *  重置效果层
- */
--(void)resetEffertLayers{
-}
 
 /**
  * Moves the player to a given position. Also performs collision detection
@@ -364,7 +313,6 @@
 
 -(void)touchEnded{
     if (self.hudLayer) {
-       [self.hudLayer.chatbox advanceTextOrHide];
     }
 }
 -(bool)isChatBoxShow{
