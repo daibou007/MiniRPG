@@ -14,6 +14,12 @@
 @implementation GameLayer(Function)
 
 
+
+
+-(void) stopSound{
+    [[GameSounds sharedGameSounds] stopBackgroundMusic];
+}
+
 -(void) playSound:(NSString *)nameStr{
     [[GameSounds sharedGameSounds] playBackgroundMusic:nameStr];
 }
@@ -37,11 +43,12 @@
     }
 }
 
-/**
- *  重置效果层
- */
--(void)resetEffertLayers{
+-(void)setViewPositionWithX:(NSNumber*)x WithY:(NSNumber*)y{
+    NSLog(@"%f",[x doubleValue]);
+    self.controlViewCamera = YES;
+    [self setViewpointCenter:ccp([x floatValue], [y floatValue])];
 }
+
 ///
 /**
  *  震动
@@ -53,6 +60,19 @@
 
 -(void)flash{
     [self flashEffectWithSpeed:10.0f];
+}
+
+- (void) setMeta:(NSString *)value forKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:value forKey:key];
+    [defaults synchronize];
+}
+
+- (NSString *) getMetaValueForKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:key];
 }
 
 @end

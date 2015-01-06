@@ -114,6 +114,9 @@
 - (void) interactWithNPCNamed:(NSString *) npcName
 {
     NSString *luaCode = [NSString stringWithFormat:@"npcs[\"%@\"]:interact()",npcName];
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        
+    });
     [self runLua:luaCode];
 }
 

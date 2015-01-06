@@ -20,6 +20,7 @@
         self.dPad = [[DPad alloc] init];
         
         self.dPad.position = ccp(50,50);
+        self.dPad.scale = 1.5;
         
         [self addChild:self.dPad];
     }

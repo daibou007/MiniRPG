@@ -22,23 +22,9 @@
 {
 	// 'scene' is an autorelease object.
 	CCScene *scene = [CCScene node];
-
-	// 'layer' is an autorelease object.
-	GameLayer *layer = [GameLayer node];
-
-	// add layer as a child to scene
-	[scene addChild: layer];
-
+    GameLayer *layer = [GameLayer node];
     
-    layer.touchLayer = [TouchLayer  node];
-    layer.touchLayer.del = layer;
-    layer.touchLayer.position = ccp(0, 0);
-    [scene addChild:layer.touchLayer];
-    
-    layer.hudLayer = [HudLayer node];
-    layer.hudLayer.position = ccp(0,0);
-    [scene addChild:layer.hudLayer];
-
+    [scene addChild:layer];
 	// return the scene
 	return scene;
 }
@@ -48,6 +34,24 @@
 {
 	if( (self=[super init]) ) {
 
+        [self setMeta:@"false" forKey:@"room_soldier_greeting"];
+        [self setMeta:@"false" forKey:@"town_soldier_greeting"];
+        // 'layer' is an autorelease object.
+        self.gameLayer = [CCLayer node];
+        
+        // add layer as a child to scene
+        [self addChild: self.gameLayer];
+        
+        
+        self.touchLayer = [TouchLayer  node];
+        self.touchLayer.del = self;
+        self.touchLayer.position = ccp(0, 0);
+        [self addChild:self.touchLayer z: 10];
+        
+        self.hudLayer = [HudLayer node];
+        self.hudLayer.position = ccp(0,0);
+        [self addChild:self.hudLayer z: 5];
+        
         self.npcManager = [[NPCManager alloc] initWithGameLayer:self];
         // start in the room always
         NSString *filename = [NSString stringWithFormat:kStartingRoom];
@@ -63,11 +67,11 @@
         self.hero.scale = 1;
         self.hero.anchorPoint = ccp(0.5,0.5);
         self.hero.zOrder = 0;
-        [self addChild:self.hero z:[[self.tileMap layerNamed:@"floor"] zOrder]];
+        [self.gameLayer addChild:self.hero z:[[self.tileMap layerNamed:@"floor"] zOrder]];
         
-//        self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
-//        [self addChild:self.envLayer z:10];
-//        [self.envLayer setVisible:NO];
+        self.envLayer = [[[EnvironmentLayer alloc] initWithWeather:2 atTime:1] autorelease];
+        [self addChild:self.envLayer z:4];
+        [self.envLayer setVisible:NO];
         
         self.canWalk = YES;
 
@@ -91,7 +95,8 @@
     name = [name stringByAppendingString:@".tmx"];
     self.tileMap = [CCTMXTiledMap tiledMapWithTMXFile:name];
     [self.tileMap setScale:kGameScale];
-    [self addChild:self.tileMap z:-1];
+    [self.gameLayer addChild:self.tileMap z:-1];
+    
     self.metaLayer = [self.tileMap layerNamed:@"meta"];
     self.metaLayer.visible = NO;
     self.tileSize = self.tileMap.tileSize.width;
@@ -99,6 +104,23 @@
     self.exitGroup = [self.tileMap objectGroupNamed:@"exits"];
     self.npcLayer = [self.tileMap layerNamed:@"npc"];
     [self.npcManager loadNPCsForTileMap:self.tileMap named:name];
+    
+    [self resetEffertLayers];
+    [self stopSound];
+    
+}
+
+/**
+ *  重置效果层
+ */
+-(void)resetEffertLayers{
+    if (self.envLayer && self.envLayer.visible) {
+        self.envLayer.visible = NO;
+    }
+}
+
+-(void)stopSound{
+    [[GameSounds sharedGameSounds] stopBackgroundMusic];
 }
 
 /**
@@ -106,7 +128,9 @@
  */
 - (void)update:(ccTime)dt
 {
-  
+    if (!self.controlViewCamera) {
+        [self setViewpointCenter:self.hero.position];
+    }
     //We reset the animation if the gunman changes direction
     
     self.hero.velocity = ccp(self.touchLayer.dPad.pressedVector.x*25, self.touchLayer.dPad.pressedVector.y*25);
@@ -120,7 +144,6 @@
             playerPos.y >= 0 &&
             playerPos.x >= 0 ){
             [self setPlayerPosition:playerPos];
-            [self setViewpointCenter:self.hero.position];
         }
     }
 }
@@ -144,7 +167,7 @@
 
     CGPoint centerOfView = ccp(winSize.width/2, winSize.height/2);
     CGPoint viewPoint = ccpSub(centerOfView, actualPosition);
-    self.position = viewPoint;
+    self.gameLayer.position = viewPoint;
 
 }
 
@@ -269,25 +292,13 @@
             
             self.hero.position = heroPoint;
             [self loadMapNamed:name];
-            [self setViewpointCenter:self.hero.position];
 
             return;
         }
     }
 }
 
-- (void) setMeta:(NSString *)value forKey:(NSString *)key
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:value forKey:key];
-    [defaults synchronize];
-}
 
-- (NSString *) getMetaValueForKey:(NSString *)key
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults objectForKey:key];
-}
 
 /**
  * Given a point on the map, returns the tile coordinate for that point.
@@ -322,6 +333,13 @@
     return NO;
 }
 
+- (void) setMeta:(NSString *)value forKey:(NSString *)key{
+
+}
+
+- (NSString *) getMetaValueForKey:(NSString *)key{
+    return nil;
+}
 
 
 @end

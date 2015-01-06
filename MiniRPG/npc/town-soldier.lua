@@ -12,11 +12,11 @@ end
 -- 3
 function soldier:interact()
     if self.game:getMetaValueForKey("town_soldier_greeting") == "true" then
-        --self.game:playSound("scenereplace.mp3")
+        self.game:playSound("rain.wav")
         self.game:showRaining(true)
-        self.game:npc_say("soldier","下雨了！！")
+        self.game:npc_say("老者:","下雨了!!!")
     else
-        self.game:npc_say("soldier", "公主不在这里！！！")
+        self.game:npc_say("老者:", "公主不在这里！！！")
         self.game:setMeta_forKey("true","town_soldier_greeting")
     end
 end

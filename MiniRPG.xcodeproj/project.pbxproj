@@ -39,6 +39,7 @@
 		4856C7961A49648400F64CEE /* CCAnimate+SequenceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E7C3F716B2D7EE0065EF4C /* CCAnimate+SequenceLoader.m */; };
 		4856C7971A49648700F64CEE /* CCAnimation+SequenceLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E7C3F916B2D7EE0065EF4C /* CCAnimation+SequenceLoader.m */; };
 		4856C79A1A49682F00F64CEE /* TouchLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4856C7991A49682F00F64CEE /* TouchLayer.mm */; };
+		48716C811A5AE97800EFA273 /* NPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 48716C801A5AE97800EFA273 /* NPC.m */; };
 		488269771A4D98F500F51035 /* build_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 4882696F1A4D98F500F51035 /* build_atlas.png */; };
 		488269781A4D98F500F51035 /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 488269701A4D98F500F51035 /* meta_tiles.png */; };
 		488269791A4D98F500F51035 /* obj_misk_atlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 488269711A4D98F500F51035 /* obj_misk_atlas.png */; };
@@ -57,6 +58,8 @@
 		489D39FC1A4D31FC003C9B06 /* TODO.md in Resources */ = {isa = PBXBuildFile; fileRef = 489D39FB1A4D31FC003C9B06 /* TODO.md */; };
 		489D39FF1A4D3479003C9B06 /* Hero.m in Sources */ = {isa = PBXBuildFile; fileRef = 489D39FE1A4D3479003C9B06 /* Hero.m */; };
 		489D3A021A4D34D7003C9B06 /* SimpleAnimObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 489D3A001A4D34D7003C9B06 /* SimpleAnimObject.m */; };
+		48B8AC7C1A5BE19E00EC8028 /* rain.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 48B8AC7B1A5BE19E00EC8028 /* rain.m4a */; };
+		48B8AC7E1A5BE2A000EC8028 /* rain.wav in Resources */ = {isa = PBXBuildFile; fileRef = 48B8AC7D1A5BE2A000EC8028 /* rain.wav */; };
 		48CDDB781A4BDD9D00A731DE /* HudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 48CDDB771A4BDD9D00A731DE /* HudLayer.m */; };
 		48D4D3021A5294040027B609 /* Raindrop.png in Resources */ = {isa = PBXBuildFile; fileRef = 48D4D2FF1A5294040027B609 /* Raindrop.png */; };
 		48D4D3031A5294040027B609 /* EnvironmentLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 48D4D3001A5294040027B609 /* EnvironmentLayer.m */; };
@@ -275,6 +278,8 @@
 		4856C7921A495AB000F64CEE /* TouchableSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchableSprite.h; sourceTree = "<group>"; };
 		4856C7981A49682F00F64CEE /* TouchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchLayer.h; sourceTree = "<group>"; };
 		4856C7991A49682F00F64CEE /* TouchLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TouchLayer.mm; sourceTree = "<group>"; };
+		48716C7F1A5AE97800EFA273 /* NPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPC.h; sourceTree = "<group>"; };
+		48716C801A5AE97800EFA273 /* NPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPC.m; sourceTree = "<group>"; };
 		4882696F1A4D98F500F51035 /* build_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = build_atlas.png; sourceTree = "<group>"; };
 		488269701A4D98F500F51035 /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meta_tiles.png; sourceTree = "<group>"; };
 		488269711A4D98F500F51035 /* obj_misk_atlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = obj_misk_atlas.png; sourceTree = "<group>"; };
@@ -298,6 +303,8 @@
 		489D39FE1A4D3479003C9B06 /* Hero.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hero.m; sourceTree = "<group>"; };
 		489D3A001A4D34D7003C9B06 /* SimpleAnimObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAnimObject.m; sourceTree = "<group>"; };
 		489D3A011A4D34D7003C9B06 /* SimpleAnimObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAnimObject.h; sourceTree = "<group>"; };
+		48B8AC7B1A5BE19E00EC8028 /* rain.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = rain.m4a; sourceTree = "<group>"; };
+		48B8AC7D1A5BE2A000EC8028 /* rain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = rain.wav; sourceTree = "<group>"; };
 		48CDDB761A4BDD9D00A731DE /* HudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudLayer.h; sourceTree = "<group>"; };
 		48CDDB771A4BDD9D00A731DE /* HudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudLayer.m; sourceTree = "<group>"; };
 		48D4D2FF1A5294040027B609 /* Raindrop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Raindrop.png; sourceTree = "<group>"; };
@@ -821,6 +828,16 @@
 			path = example;
 			sourceTree = "<group>";
 		};
+		48B8AC7A1A5BE19E00EC8028 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				48B8AC7D1A5BE2A000EC8028 /* rain.wav */,
+				48B8AC7B1A5BE19E00EC8028 /* rain.m4a */,
+			);
+			name = sound;
+			path = Resources/sound;
+			sourceTree = "<group>";
+		};
 		48D4D3191A52A2250027B609 /* lua */ = {
 			isa = PBXGroup;
 			children = (
@@ -1184,6 +1201,8 @@
 		C7E7C24A16B2D6E50065EF4C = {
 			isa = PBXGroup;
 			children = (
+				48716C7F1A5AE97800EFA273 /* NPC.h */,
+				48716C801A5AE97800EFA273 /* NPC.m */,
 				C7E7C26B16B2D6E50065EF4C /* MiniRPG */,
 				C7E7C25816B2D6E50065EF4C /* Frameworks */,
 				C7E7C25616B2D6E50065EF4C /* Products */,
@@ -1258,6 +1277,7 @@
 		C7E7C26C16B2D6E60065EF4C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				48B8AC7A1A5BE19E00EC8028 /* sound */,
 				4882696E1A4D98F500F51035 /* map */,
 				48D5928F1A4D3C1700A10C52 /* scenereplace.mp3 */,
 				48D5928D1A4D393700A10C52 /* soft.mp3 */,
@@ -1373,6 +1393,7 @@
 				C7E7C27216B2D6E60065EF4C /* fps_images.png in Resources */,
 				C7E7C27416B2D6E60065EF4C /* fps_images-hd.png in Resources */,
 				48D5928E1A4D393700A10C52 /* soft.mp3 in Resources */,
+				48B8AC7C1A5BE19E00EC8028 /* rain.m4a in Resources */,
 				C7E7C27616B2D6E60065EF4C /* fps_images-ipadhd.png in Resources */,
 				C7E7C27816B2D6E60065EF4C /* Icon-72.png in Resources */,
 				4856C76A1A4955CC00F64CEE /* LICENSE_lua.txt in Resources */,
@@ -1396,6 +1417,7 @@
 				CC55B27F16BB0C0400A7D6B7 /* chat-box.png in Resources */,
 				4856C78C1A49577200F64CEE /* dpad_buttons.plist in Resources */,
 				488269891A4DA86300F51035 /* test_desert.tmx in Resources */,
+				48B8AC7E1A5BE2A000EC8028 /* rain.wav in Resources */,
 				48E333A11A591E2A000C55B1 /* DLDialogBox.bundle in Resources */,
 				4856C75A1A4955CC00F64CEE /* CMakeLists.txt in Resources */,
 				488269771A4D98F500F51035 /* build_atlas.png in Resources */,
@@ -1468,6 +1490,7 @@
 				4856C5D01A4955A900F64CEE /* AppDelegate.m in Sources */,
 				48E334B51A592159000C55B1 /* CCTMXObjectGroup.m in Sources */,
 				489D39FF1A4D3479003C9B06 /* Hero.m in Sources */,
+				48716C811A5AE97800EFA273 /* NPC.m in Sources */,
 				4856C75D1A4955CC00F64CEE /* mat3.c in Sources */,
 				48E334AE1A592159000C55B1 /* CCSpriteFrameCache.m in Sources */,
 				48E334861A592159000C55B1 /* CCAnimationCache.m in Sources */,
